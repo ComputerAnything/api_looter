@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>API Detail</title>
+</head>
+<body>
+    {% include 'layout.html' %}
+    <div class="container">
+        <h1>{{ api.name }}</h1>
+        <p>{{ api.description }}</p>
+        <form action="{{ url_for('api.call_api', api_id=api.id) }}" method="post">
+            {{ form.hidden_tag() }}
+            {{ form.input.label }} {{ form.input() }}
+            <button type="submit">Call API</button>
+        </form>
+        <a href="{{ url_for('api.index') }}">Back to API List</a>
+    </div>
+</body>
+</html>
