@@ -44,7 +44,7 @@ api_looter
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/yourusername/api_looter.git
+   git clone https://github.com/Computer-Anything/api_looter.git
    ```
 
 2. **Navigate to the project directory:**
@@ -66,7 +66,7 @@ api_looter
 1. **Run the application:**
 
    ```bash
-   cd python run.py
+   flask run
    ```
 
 2. **Open your browser:**

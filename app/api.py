@@ -50,7 +50,7 @@ def parse_response(response):
 
 @bp.route('/')
 def index():
-    apis = APIModel.query.all()
+    apis = APIModel.query.order_by(APIModel.name.asc()).all()
     return render_template('index.html', apis=apis)
 
 @bp.route('/api/<int:api_id>', methods=['GET', 'POST'])
