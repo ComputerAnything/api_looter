@@ -1,0 +1,222 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background: #35424a;
+    color: #ffffff;
+    padding: 10px 0;
+    text-align: center;
+}
+
+h1 {
+    margin: 0;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+}
+
+.api-list {
+    list-style: none;
+    padding: 0;
+}
+
+.api-list li {
+    background: #ffffff;
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.api-list li:hover {
+    background: #e2e2e2;
+}
+
+.api-detail {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+form {
+    margin-top: 20px;
+}
+
+form input[type="text"],
+form input[type="submit"],
+form select {
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+form input[type="submit"] {
+    background: #35424a;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+}
+
+form input[type="submit"]:hover {
+    background: #2c3e50;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
+.footer {
+    background: #000000;
+    color: #fff;
+    padding: 1em 0;
+    text-align: center;
+}
+
+.back-btn {
+    display: inline-block;
+    margin-top: 1.5em;
+    padding: 0.5em 1.5em;
+    background: #2c3e50;
+    color: #fff;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+.back-btn:hover {
+    background: #1a242f;
+    color: #fff;
+}
+
+.api-detail-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+.api-detail-center form,
+.api-detail-center fieldset,
+.api-detail-center .joke-result,
+.api-detail-center pre,
+.api-detail-center img,
+.api-detail-center .back-btn {
+    align-self: center;
+}
+
+.center-btn {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+#api-list {
+    list-style: none;
+    padding: 0;
+    margin: 1em 0 0 0;
+    width: 100%;
+    max-width: 400px;
+}
+
+#api-list li {
+    text-align: center;
+    margin-bottom: 0.5em;
+}
+
+/* ...existing styles... */
+
+.api-detail-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    padding: 1em;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.api-detail-center form,
+.api-detail-center fieldset,
+.api-detail-center .joke-result,
+.api-detail-center pre,
+.api-detail-center img,
+.api-detail-center .back-btn {
+    align-self: center;
+    width: 100%;
+    max-width: 400px;
+}
+
+.api-detail-center fieldset {
+    width: 100%;
+    max-width: 400px;
+    box-sizing: border-box;
+}
+
+.api-detail-center input,
+.api-detail-center select {
+    width: 100%;
+    max-width: 350px;
+    box-sizing: border-box;
+}
+
+.joke-result,
+.api-detail-center pre,
+.api-detail-center .back-btn {
+    width: 100%;
+    max-width: 400px;
+    box-sizing: border-box;
+}
+
+@media (max-width: 500px) {
+    .api-detail-center {
+        padding: 0.5em;
+    }
+    .api-detail-center form,
+    .api-detail-center fieldset,
+    .api-detail-center .joke-result,
+    .api-detail-center pre,
+    .api-detail-center img,
+    .api-detail-center .back-btn {
+        max-width: 98vw;
+        width: 100%;
+    }
+    .api-detail-center input,
+    .api-detail-center select {
+        max-width: 98vw;
+        width: 100%;
+    }
+}

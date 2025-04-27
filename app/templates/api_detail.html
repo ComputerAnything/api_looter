@@ -1,0 +1,69 @@
+{% extends "layout.html" %}
+{% block title %}{{ api.name }}{% endblock %}
+{% block content %}
+<div class="api-detail-center">
+    <h2>{{ api.name }}</h2>
+    <p>{{ api.description }}</p>
+    <p><strong>Endpoint:</strong> {{ api.endpoint }}</p>
+
+    <form method="post" class="api-form">
+        {% if api.parameters and api.parameters|length > 0 %}
+            <fieldset style="border:1px solid #ccc; padding:1em; margin-bottom:1em;">
+                <legend><strong>Enter Required Parameters</strong></legend>
+                {% for param in api.parameters %}
+                    <div style="margin-bottom:0.75em;">
+                        <label for="{{ param.name }}">
+                            {{ param.label }}{% if param.required %} <span style="color:red">*</span>{% endif %}
+                        </label><br>
+                        {% if param.type == "select" and param.options %}
+                            <select name="{{ param.name }}" id="{{ param.name }}" style="width: 100%; max-width: 350px; padding: 0.5em;" {% if param.required %}required{% endif %}>
+                                <option value="">-- Select --</option>
+                                {% for option in param.options %}
+                                    <option value="{{ option.value }}">{{ option.label }}</option>
+                                {% endfor %}
+                            </select>
+                        {% else %}
+                            <input
+                                type="{{ param.type }}"
+                                name="{{ param.name }}"
+                                id="{{ param.name }}"
+                                placeholder="Enter {{ param.label|lower }}"
+                                {% if param.required %}required{% endif %}
+                                style="width: 100%; max-width: 350px; padding: 0.5em;"
+                            >
+                        {% endif %}
+                    </div>
+                {% endfor %}
+                </fieldset>
+        {% else %}
+            <p style="color: #888;">No parameters required for this API.</p>
+        {% endif %}
+        <div class="center-btn">
+            <button type="submit" style="padding:0.5em 1.5em;">Call API</button>
+        </div>
+    </form>
+    <a href="{{ url_for('main.index') }}" class="back-btn">← Back to List</a>
+
+    {% if result_type == "joke" %}
+        <h3>Result:</h3>
+        <div class="joke-result" style="background:#222; color:#fff; padding:1em; border-radius:6px; margin-bottom:1em;">
+            <div><strong>Category:</strong> {{ result.category }}</div>
+            <div style="margin-top:0.5em;"><strong>Setup:</strong> {{ result.setup }}</div>
+            {% if result.delivery %}
+                <div style="margin-top:0.5em;"><strong>Delivery:</strong> {{ result.delivery }}</div>
+            {% endif %}
+        </div>
+    {% elif result %}
+        <h3>Result:</h3>
+        {% if result_type == "json" %}
+            <pre style="background:#222; color:#fff; padding:1em; border-radius:6px; max-height:300px; overflow:auto;">{{ result | tojson(indent=2) }}</pre>
+        {% elif result_type == "image" %}
+            <img src="{{ result }}" alt="API Image Result" style="max-width:100%; border:1px solid #ccc; border-radius:6px;">
+        {% else %}
+            <div style="background:#222; color:#fff; padding:1em; border-radius:6px; max-height:300px; overflow:auto;">
+                {{ result|safe }}
+            </div>
+        {% endif %}
+    {% endif %}
+</div>
+{% endblock %}
