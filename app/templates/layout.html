@@ -7,19 +7,29 @@
     <title>{% block title %}API Looter{% endblock %}</title>
 </head>
 <body>
-    <header>
-        <h1>API Looter</h1>
-        <nav>
-            <ul>
-                <li><a href="{{ url_for('index') }}">Home</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        {% block content %}{% endblock %}
-    </main>
-    <footer>
-        <p>&copy; {{ current_year }} API Looter. All rights reserved.</p>
-    </footer>
+    <div class="wrapper">
+        <header>
+            <h1>API Looter</h1>
+        </header>
+        <main>
+            {% block content %}{% endblock %}
+        </main>
+        <footer class="footer">
+            <div class="footer-container">
+                <div class="ca_link" style="text-align:center;">
+                    Copyright © 2025 API Looter - All Rights Reserved -
+                    Developed &amp; Designed By:
+                    <a href="https://www.computeranything.dev" target="_blank" rel="noopener noreferrer">
+                        <img
+                            src="../static/cpt_anything_box_thumb.jpg"
+                            alt="Computer Anything"
+                            class="footer-logo"
+                            style="margin-left: 5px; vertical-align: middle;"
+                        />
+                    </a>
+                </div>
+            </div>
+        </footer>
+    </div>
 </body>
 </html>

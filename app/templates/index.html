@@ -1,40 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <title>API Looter</title>
-</head>
-<body>
-    {% include 'layout.html' %}
-    <div class="container">
-        <h1>Available APIs</h1>
-        <input type="text" id="search" placeholder="Search for APIs..." onkeyup="filterAPIs()">
-        <ul id="api-list">
-            {% for api in apis %}
-                <li>
-                    <a href="{{ url_for('api_detail', api_id=api.id) }}">{{ api.name }}</a>
-                </li>
-            {% endfor %}
-        </ul>
-    </div>
-    <script>
-        function filterAPIs() {
-            const input = document.getElementById('search');
-            const filter = input.value.toLowerCase();
-            const ul = document.getElementById("api-list");
-            const li = ul.getElementsByTagName('li');
+{% extends "layout.html" %}
+{% block title %}API Looter{% endblock %}
+{% block content %}
+<div class="container">
+    <h1>Available APIs</h1>
+    <input type="text" id="search" placeholder="Search for APIs..." onkeyup="filterAPIs()">
+    <ul id="api-list">
+        {% for api in apis %}
+            <li>
+                <a href="{{ url_for('main.api_detail', api_id=api.id) }}">{{ api.name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+<script>
+    function filterAPIs() {
+        const input = document.getElementById('search');
+        const filter = input.value.toLowerCase();
+        const ul = document.getElementById("api-list");
+        const li = ul.getElementsByTagName('li');
 
-            for (let i = 0; i < li.length; i++) {
-                const a = li[i].getElementsByTagName("a")[0];
-                if (a.innerHTML.toLowerCase().indexOf(filter) > -1) {
-                    li[i].style.display = "";
-                } else {
-                    li[i].style.display = "none";
-                }
+        for (let i = 0; i < li.length; i++) {
+            const a = li[i].getElementsByTagName("a")[0];
+            if (a.innerHTML.toLowerCase().indexOf(filter) > -1) {
+                li[i].style.display = "";
+            } else {
+                li[i].style.display = "none";
             }
         }
-    </script>
-</body>
-</html>
+    }
+</script>
+{% endblock %}
