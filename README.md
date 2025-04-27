@@ -26,12 +26,15 @@ api_looter
 │   ├── api.py
 │   ├── models.py
 │   ├── forms.py
+│   ├── seed.py
 │   ├── templates
 │   │   ├── index.html
 │   │   ├── api_detail.html
 │   │   └── layout.html
 │   └── static
 │       └── style.css
+├── migrations
+│   └── ... (migration files)
 ├── requirements.txt
 ├── run.py
 └── README.md
