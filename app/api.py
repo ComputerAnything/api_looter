@@ -4,14 +4,17 @@ import requests
 
 bp = Blueprint('main', __name__)
 
+# Cat Facts API Helper
 def handle_cat_facts_api(api, params=None):
     response = requests.get(api.endpoint, headers={"Accept": "application/json"})
     return parse_response(response)
 
+# Dog CEO API Helper
 def handle_dog_ceo_api(api, params=None):
     response = requests.get(api.endpoint, headers={"Accept": "application/json"})
     return parse_response(response)
 
+# JokeAPI Helper
 def handle_jokeapi(api, params=None):
     response = requests.get(api.endpoint, params=params, headers={"Accept": "application/json"})
     return parse_jokeapi_response(response)
@@ -28,6 +31,7 @@ def parse_jokeapi_response(response):
     except Exception:
         return response.text, "text"
 
+# Default API Helper
 def handle_default_api(api, params=None):
     response = requests.get(api.endpoint, params=params, headers={"Accept": "application/json"})
     return parse_response(response)
