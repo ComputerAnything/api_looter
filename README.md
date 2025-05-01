@@ -17,6 +17,16 @@ Easily search, explore, and test APIs right from your browser! 🛠️🌐
 
 ---
 
+## 🖼️ Screenshots
+
+![Home Page](assets/Screenshot2%20API%20Looter.png)
+*Home page with searchable API directory*
+
+![API Detail](assets/Screenshot1%20API%20Looter.png)
+*Detailed API view and live testing*
+
+---
+
 ## 📁 Project Structure
 
 ```bash
@@ -46,21 +56,21 @@ api_looter
 
 1. **Clone the repository:**
 
-   ```bash
-   git clone https://github.com/Computer-Anything/api_looter.git
-   ```
+    ```bash
+    git clone https://github.com/Computer-Anything/api_looter.git
+    ```
 
 2. **Navigate to the project directory:**
 
-   ```bash
-   cd api_looter
-   ```
+    ```bash
+    cd api_looter
+    ```
 
 3. **Install dependencies:**
 
-   ```bash
-   pip install -r requirements.txt
-   ```
+    ```bash
+    pip install -r requirements.txt
+    ```
 
 ---
 
@@ -68,12 +78,12 @@ api_looter
 
 1. **Run the application:**
 
-   ```bash
-   flask run
-   ```
+    ```bash
+    flask run
+    ```
 
 2. **Open your browser:**
-   Go to [http://127.0.0.1:5000](http://127.0.0.1:5000) to start using api_looter!
+    Go to [http://127.0.0.1:5000](http://127.0.0.1:5000) to start using api_looter!
 
 ---
 
