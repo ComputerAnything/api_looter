@@ -6,8 +6,10 @@
     <input type="text" id="search" placeholder="Search for APIs..." onkeyup="filterAPIs()">
     <ul id="api-list">
         {% for api in apis %}
-            <li>
-                <a href="{{ url_for('main.api_detail', api_id=api.id) }}">{{ api.name }}</a>
+            <li class="api-list-item">
+                <a href="{{ url_for('main.api_detail', api_id=api.id) }}">
+                    <span class="api-list-name">{{ api.name }}</span>
+                </a>
             </li>
         {% endfor %}
     </ul>
