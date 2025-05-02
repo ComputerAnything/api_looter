@@ -33,20 +33,24 @@ Easily search, explore, and test APIs right from your browser! 🛠️🌐
 api_looter
 ├── app
 │   ├── __init__.py
-│   ├── api.py
-│   ├── models.py
+│   ├── api_helpers.py
 │   ├── forms.py
+│   ├── models.py
+│   ├── routes.py
 │   ├── seed.py
 │   ├── templates
 │   │   ├── index.html
 │   │   ├── api_detail.html
 │   │   └── layout.html
 │   └── static
-│       └── style.css
+│       ├── style.css
+│       ├── favicon.ico
+│       └── cpt_anything_box_thumb.jpg
 ├── migrations
 │   └── ... (migration files)
 ├── requirements.txt
 ├── run.py
+├── Procfile
 └── README.md
 ```
 
