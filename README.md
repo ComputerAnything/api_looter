@@ -19,10 +19,10 @@ Easily search, explore, and test APIs right from your browser! 🛠️🌐
 
 ## 🖼️ Screenshots
 
-![Home Page](assets/Screenshot2%20API%20Looter.png)
+![Home Page](assets/Screenshot_API_Search_sml.png)
 *Home page with searchable API directory*
 
-![API Detail](assets/Screenshot1%20API%20Looter.png)
+![API Detail](assets/Screenshot_API_Detail_sml.png)
 *Detailed API view and live testing*
 
 ---
@@ -76,16 +76,56 @@ api_looter
 
 ## ▶️ Usage
 
-1. **Run the application:**
+1. **Set up the database:**
+
+    ```bash
+    python -m flask db init
+    python -m flask db migrate
+    python -m flask db upgrade
+    ```
+
+2. **Seed the database with sample data:**
+
+    ```bash
+    python -m app.seed
+    ```
+
+3. **Run the application:**
 
     ```bash
     flask run
     ```
 
-2. **Open your browser:**
-    Go to [http://127.0.0.1:5000](http://127.0.0.1:5000) to start using api_looter!
+4. **Open your browser:**
+    Go to [http://127.0.0.1:5000](http://127.0.0.1:5000) to start adding and testing some API's api_looter!
 
 ---
+
+## ➕ Adding Your Own APIs
+
+To add a new API, simply add an `APIModel` entry to the `apis` list in [`app/seed.py`](app/seed.py).
+**No code changes are needed for most APIs!**
+
+**Example:**
+
+```python
+APIModel(
+    name="My Cool API",
+    description="Does something awesome.",
+    endpoint="https://api.example.com/endpoint",
+    parameters=[
+        {"name": "param1", "label": "Parameter 1", "type": "text", "required": True}
+    ]
+),
+```
+
+**Advanced:**
+If your API returns data in a very unique way and you want to customize how the response is displayed, you can add a helper function in [`app/api_helpers.py`](app/api_helpers.py).
+*This is optional and only needed for special cases!*
+
+---
+
+For most APIs, just editing `seed.py` is all you need.
 
 ## 🤝 Contributing
 
