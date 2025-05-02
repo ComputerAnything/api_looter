@@ -5,3 +5,4 @@ gunicorn==20.1.0
 Flask-SQLAlchemy
 Flask-Migrate
 python-dotenv
+psycopg2-binary
