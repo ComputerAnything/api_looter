@@ -138,6 +138,27 @@ Feel free to [open an issue](https://github.com/Computer-Anything/api_looter/iss
 
 ---
 
+## 🧹 Code Quality
+
+This project uses [ruff](https://docs.astral.sh/ruff/) for linting.
+To check your code:
+
+```bash
+pip install ruff
+ruff .
+```
+
+You can adjust which warnings are ignored in `pyproject.toml`.
+
+---
+
+## 🛠️ Technologies Used
+
+- **Flask**: Web framework for Python.
+- **PSQL**: Database for storing API data.
+- **HTML/CSS**: For the frontend.
+- **JavaScript**: For dynamic API testing.
+
 ## 📄 License
 
 Licensed under the [MIT License](LICENSE).

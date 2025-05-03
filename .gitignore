@@ -1,11 +1,25 @@
-.env
+# Python
 __pycache__/
-*.pyc
+*.py[cod]
 *.pyo
-*.sqlite3
-*.db
-migrations/versions/*.pyc
-.vscode/
-.idea/
+*.pyd
+
+# Environment variables
+.env
+
+# Virtual environments
 env/
 venv/
+.venv/
+
+# VS Code and IDEs
+.vscode/
+.idea/
+
+# macOS system files
+.DS_Store
+
+# Flask/Migrations
+migrations/versions/*.pyc
+instance/
+*.log

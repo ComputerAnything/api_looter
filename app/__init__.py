@@ -19,7 +19,7 @@ def create_app():
     migrate.init_app(app, db)
 
     # Import models so Alembic can detect them
-    from . import models
+    from . import models  # noqa: F401
 
     from .routes import bp as main_bp
     app.register_blueprint(main_bp) # Register the main blueprint

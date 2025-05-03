@@ -1,5 +1,8 @@
+# pyright: reportCallIssue=false
+
 from app import create_app, db
 from app.models import APIModel
+
 
 def seed_apis():
     apis = [
