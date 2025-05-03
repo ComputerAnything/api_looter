@@ -9,8 +9,6 @@ requires-python = ">=3.8"
 
 [tool.ruff]
 line-length = 100
-ignore = ["E501"]  # Ignore line length warnings
-select = ["E", "F", "W", "C90"]
 exclude = [
     ".git",
     "__pycache__",
@@ -19,14 +17,9 @@ exclude = [
     "env",
 ]
 
-[tool.black]
-line-length = 100
-target-version = ['py38']
+[tool.ruff.lint]
+ignore = ["E501"]
+select = ["E", "F", "W", "C90"]
 
-[tool.isort]
-profile = "black"
-line_length = 100
-skip = ["migrations", "venv", "env"]
-
-[tool.ruff.per-file-ignores]
+[tool.ruff.lint.per-file-ignores]
 "app/seed.py" = ["E501", "F401", "F841", "F811", "F405"]
