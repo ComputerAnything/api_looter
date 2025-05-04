@@ -27,5 +27,13 @@ services:
     volumes:
       - .:/app
 
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: --cleanup --schedule "0 0 * * *"
+
 volumes:
   pgdata:
