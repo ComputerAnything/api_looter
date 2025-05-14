@@ -44,19 +44,12 @@
     </form>
     <a href="{{ url_for('main.index') }}" class="back-btn">← Back to List</a>
 
-    {% if result_type == "joke" %}
-        <h3>Result:</h3>
-        <div class="joke-result" style="background:#222; color:#fff; padding:1em; border-radius:6px; margin-bottom:1em;">
-            <div><strong>Category:</strong> {{ result.category }}</div>
-            <div style="margin-top:0.5em;"><strong>Setup:</strong> {{ result.setup }}</div>
-            {% if result.delivery %}
-                <div style="margin-top:0.5em;"><strong>Delivery:</strong> {{ result.delivery }}</div>
-            {% endif %}
-        </div>
-    {% elif result %}
-        <h3>Result:</h3>
+    <h3>Result:</h3>
+    {% if result %}
         {% if result_type == "json" %}
-            <pre style="background:#222; color:#fff; padding:1em; border-radius:6px; max-height:300px; overflow:auto;">{{ result | tojson(indent=2) }}</pre>
+            <pre style="background:#222; color:#fff; padding:1em; border-radius:6px; max-height:300px; overflow:auto;">
+                <code class="language-json">{{ result | safe }}</code>
+            </pre>
         {% elif result_type == "image" %}
             <img src="{{ result }}" alt="API Image Result" style="max-width:100%; border:1px solid #ccc; border-radius:6px;">
         {% else %}
@@ -64,6 +57,23 @@
                 {{ result|safe }}
             </div>
         {% endif %}
+    {% else %}
+        <p style="color: #888;">No result to display. Submit the form to call the API.</p>
     {% endif %}
 </div>
+
+<script>
+    // Add a loading spinner when the form is submitted
+    const form = document.querySelector('.api-form');
+    const loading = document.createElement('div');
+    loading.innerHTML = '<p>Loading...</p>';
+    loading.style.textAlign = 'center';
+    loading.style.marginTop = '1em';
+    loading.style.display = 'none';
+    form.parentNode.insertBefore(loading, form.nextSibling);
+
+    form.addEventListener('submit', () => {
+        loading.style.display = 'block';
+    });
+</script>
 {% endblock %}
