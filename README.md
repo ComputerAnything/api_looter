@@ -27,35 +27,6 @@ Easily search, explore, and test APIs right from your browser! 🛠️🌐
 
 ---
 
-## 📁 Project Structure
-
-```bash
-api_looter
-├── app
-│   ├── __init__.py
-│   ├── api_helpers.py
-│   ├── forms.py
-│   ├── models.py
-│   ├── routes.py
-│   ├── seed.py
-│   ├── templates
-│   │   ├── index.html
-│   │   ├── api_detail.html
-│   │   └── layout.html
-│   └── static
-│       ├── style.css
-│       ├── favicon.ico
-│       └── cpt_anything_box_thumb.jpg
-├── migrations
-│   └── ... (migration files)
-├── requirements.txt
-├── run.py
-├── Procfile
-└── README.md
-```
-
----
-
 ## 🚦 Installation
 
 1. **Clone the repository:**
@@ -102,6 +73,38 @@ api_looter
 
 4. **Open your browser:**
     Go to [http://127.0.0.1:5000](http://127.0.0.1:5000) to start adding and testing some API's api_looter!
+
+---
+
+## 🐳 Docker Compose Setup
+
+If you prefer to run the application using Docker, you can use the provided `docker-compose.yml` file.
+
+1. **Build and run the Docker containers:**
+
+    ```bash
+    docker-compose up --build
+    ```
+
+2. **Access the application:**
+    Open your browser and go to [http://localhost:5000](http://localhost:5000).
+3. **Stop the containers:**
+    To stop the containers, press `Ctrl + C` in the terminal where you ran the `docker-compose` command.
+4. **Remove the containers:**
+    If you want to remove the containers and free up resources, run:
+
+    ```bash
+    docker-compose down
+    ```
+
+5. **Access the database:**
+    You can access the PostgreSQL database using a database client like pgAdmin or DBeaver.
+    The connection details are as follows:
+    - Host: `db`
+    - Port: `5432`
+    - Database: `api_looter`
+    - User: `postgres`
+    - Password: `password`
 
 ---
 
