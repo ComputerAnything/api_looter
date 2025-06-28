@@ -96,6 +96,14 @@ If you prefer to run the application using Docker, you can use the provided `doc
     ```bash
     docker-compose down
     ```
+5. **Access the database:**
+    You can access the PostgreSQL database using a database client like pgAdmin or DBeaver.
+    The connection details are as follows:
+    - Host: `db`
+    - Port: `5432`
+    - Database: `api_looter`
+    - User: `postgres`
+    - Password: `password`
 
 ---
 
