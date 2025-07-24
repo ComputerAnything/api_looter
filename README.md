@@ -107,6 +107,18 @@ If you prefer to run the application using Docker, you can use the provided `doc
 
 ---
 
+## 🗂️ Environment Variables
+
+Create a `.env` file in the root directory and add the following:
+
+    ```sh
+    # Database Configuration
+    DATABASE_URL=postgresql://psql_username:psql_password:5432/db_name
+
+    # Secret Key for Flask
+    SECRET_KEY=your_secret_key
+    ```
+
 ## ➕ Adding Your Own APIs
 
 To add a new API, simply add an `APIModel` entry to the `apis` list in [`app/seed.py`](app/seed.py).
