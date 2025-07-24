@@ -23,3 +23,6 @@ venv/
 migrations/versions/*.pyc
 instance/
 *.log
+
+# Ruff cache
+.ruff_cache/
