@@ -19,11 +19,14 @@ Easily search, explore, and test APIs right from your browser! 🛠️🌐
 
 ## 🖼️ Screenshots
 
-![Home Page](assets/Screenshot_API_Search_sml.png)
+![Home Page](assets/screenshot_api_search.png)
 *Home page with searchable API directory*
 
-![API Detail](assets/Screenshot_API_Detail_sml.png)
+![API Detail](assets/screenshot_api_detail.png)
 *Detailed API view and live testing*
+
+![API Photo Generation](assets/screenshot_api_dog.png)
+*Example API call to generate random dog photos*
 
 ---
 
