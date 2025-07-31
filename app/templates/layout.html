@@ -13,9 +13,11 @@
 </head>
 <body>
     <div class="wrapper">
-        <header>
-            <h1>API Looter</h1>
-        </header>
+<header class="header-with-logos">
+    <img src="{{ url_for('static', filename='api_looter_nobg.png') }}" alt="API Looter Logo Left" class="header-logo header-logo-left">
+    <h1>API Looter</h1>
+    <img src="{{ url_for('static', filename='api_looter_nobg.png') }}" alt="API Looter Logo Right" class="header-logo header-logo-right">
+</header>
         <main>
             {% block content %}{% endblock %}
         </main>

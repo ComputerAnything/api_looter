@@ -1,3 +1,16 @@
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: url('/static/api_looter.png') no-repeat center center;
+    background-size: cover;
+    opacity: 0.18;
+    z-index: 0;
+    pointer-events: none;
+}
 :root {
     --main-bg: #23272a;
     --panel-bg: #2d333b;
@@ -16,8 +29,9 @@ body {
     padding: 0;
 }
 
-header {
-    background: var(--accent-green-dark);
+
+header.header-with-logos {
+    background: #ffffff; /* Mint green */
     color: var(--text-main);
     padding: 0.8em 0 0.6em 0;
     text-align: center;
@@ -25,6 +39,35 @@ header {
     font-size: 1.2em;
     font-weight: bold;
     border-bottom: 2px solid var(--accent-green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.header-logo {
+    height: 48px;
+    width: 48px;
+    object-fit: contain;
+    margin: 0 18px;
+    background: transparent;
+}
+
+.header-logo-left {
+    margin-right: 18px;
+}
+.header-logo-right {
+    margin-left: 18px;
+}
+
+header.header-with-logos h1 {
+    flex: 0 1 auto;
+    margin: 0 10px;
+    color: #145c4a;
+    background: transparent;
+    font-size: 2em;
+    font-weight: bold;
+    letter-spacing: 2px;
 }
 
 .wrapper {
@@ -69,9 +112,10 @@ main {
 }
 
 .api-detail-center, .container {
-    background: var(--panel-bg);
+    background: rgba(20, 24, 28, 0.98); /* Darker, nearly opaque */
     border-radius: 12px;
-    box-shadow: 0 2px 12px rgba(20, 92, 74, 0.07);
+    box-shadow: 0 2px 16px rgba(20, 92, 74, 0.18);
+    border: 1.5px solid rgba(26, 188, 156, 0.22);
     margin: 2em auto;
     padding: 2em 1em;
     max-width: 500px;

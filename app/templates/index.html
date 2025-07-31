@@ -3,6 +3,15 @@
 {% block content %}
 <div class="container">
     <h1>Available APIs</h1>
+    <div style="margin-bottom: 1.2em; text-align: center;">
+        <span style="font-size: 1.08em; color: var(--accent-green); font-weight: 500;">
+            Commit to a growing list and community of usable APIs!
+        </span>
+        <br>
+        <a href="https://github.com/ComputerAnything/api_looter" target="_blank" rel="noopener noreferrer" style="color: #fff; background: var(--accent-green); padding: 0.4em 1.2em; border-radius: 6px; font-weight: bold; text-decoration: none; margin-top: 0.5em; display: inline-block; transition: background 0.18s;">
+            ⭐ Star or Contribute on GitHub
+        </a>
+    </div>
     <input type="text" id="search" placeholder="Search for APIs..." onkeyup="filterAPIs()">
     <ul id="api-list">
         {% for api in apis %}
