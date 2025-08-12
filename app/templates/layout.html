@@ -1,42 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#000000" />
+
+    <!-- Primary Meta Tags -->
+
+
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.png') }}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
     <title>{% block title %}API Looter{% endblock %}</title>
+  </head>
+  <body>
 
-</head>
-<body>
     <div class="wrapper">
-<header class="header-with-logos">
-    <img src="{{ url_for('static', filename='api_looter_nobg.png') }}" alt="API Looter Logo Left" class="header-logo header-logo-left">
-    <h1>API Looter</h1>
-    <img src="{{ url_for('static', filename='api_looter_nobg.png') }}" alt="API Looter Logo Right" class="header-logo header-logo-right">
-</header>
-        <main>
-            {% block content %}{% endblock %}
-        </main>
-        <footer class="footer">
-            <div class="footer-container">
-                <div class="ca_link" style="text-align:center;">
-                    Copyright © 2025 API Looter - All Rights Reserved -
-                    Developed &amp; Designed By:
-                    <a href="https://www.computeranything.dev" target="_blank" rel="noopener noreferrer">
-                        <img
-                            src="../static/cpt_anything_box_thumb.jpg"
-                            alt="Computer Anything"
-                            class="footer-logo"
-                            style="margin-left: 5px; vertical-align: middle;"
-                        />
-                    </a>
-                </div>
-            </div>
-        </footer>
+      <!-- Header -->
+      <header class="header-with-logos">
+        <img src="{{ url_for('static', filename='api_looter_nobg.png') }}" alt="API Looter Logo Left" class="header-logo header-logo-left">
+        <h1>API Looter</h1>
+        <img src="{{ url_for('static', filename='api_looter_nobg.png') }}" alt="API Looter Logo Right" class="header-logo header-logo-right">
+      </header>
+
+      <!-- Main -->
+      <main>
+          {% block content %}{% endblock %}
+      </main>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="footer-container">
+          <div class="ca_link" style="text-align:center;">
+            <span>
+              Copyright © 2025 API Looter - All Rights Reserved
+            </span>
+            <span class="mx-1 d-none d-sm-inline">&middot;</span>
+            <span class="footer-powered-by">
+              <a
+                class="small"
+                href="https://computeranything.dev"
+                target="_blank"
+                rel="noopener noreferrer"
+                style="color: #fff;"
+              >
+                Powered by Computer Anything LLC
+              </a>
+              <a
+                href="https://computeranything.dev"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  class="footer-logo"
+                  src="../static/cpt-anything-transparent-thumb.png"
+                  alt="Computer Anything Logo"
+                  style="vertical-align: middle; display: inline-block;"
+                />
+              </a>
+            </span>
+            <!-- <a href="https://www.computeranything.dev" target="_blank" rel="noopener noreferrer">
+              <img
+                  src="../static/cpt-anything-transparent-thumb.png"
+                  alt="Computer Anything"
+                  class="footer-logo"
+                  style="margin-left: 5px; vertical-align: middle;"
+              />
+            </a> -->
+          </div>
+        </div>
+      </footer>
     </div>
-</body>
+
+  </body>
 </html>

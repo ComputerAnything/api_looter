@@ -205,9 +205,37 @@ button:hover, .back-btn:hover {
 .footer {
     background: #000 !important;
     color: #fff;
-    padding: 1em 0;
+    padding: 10px 0;
     text-align: center;
     border-top: 2px solid var(--accent-green);
+}
+
+.footer-logo {
+  width: 45px;
+  height: 45px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.footer-powered-by {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+  min-width: 0;
+}
+
+.mx-1 {
+  margin-left: 0.25rem;
+  margin-right: 0.25rem;
+}
+.d-none {
+  display: none !important;
+}
+@media (min-width: 576px) {
+  .d-sm-inline {
+    display: inline !important;
+  }
 }
 
 @media (max-width: 600px) {
