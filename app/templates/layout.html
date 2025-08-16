@@ -6,14 +6,37 @@
     <meta name="theme-color" content="#000000" />
 
     <!-- Primary Meta Tags -->
+    <title>{% block title %}API Looter - Open Source API Directory{% endblock %}</title>
+    <meta name="description" content="API Looter is an open source project and community for discovering, sharing, and using public APIs. Contribute your favorite APIs and explore new ones! Powered by Computer Anything LLC.">
 
+    <!-- Social Media Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://apilooter.computeranything.dev/">
+    <meta property="og:title" content="API Looter - Open Source API Directory">
+    <meta property="og:description" content="API Looter is an open source project and community for discovering, sharing, and using public APIs. Contribute your favorite APIs and explore new ones!">
+    <meta property="og:image" content="https://apilooter.computeranything.dev/static/api_looter.png">
 
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://apilooter.computeranything.dev/">
+    <meta name="twitter:title" content="API Looter - Open Source API Directory">
+    <meta name="twitter:description" content="API Looter is an open source project and community for discovering, sharing, and using public APIs. Contribute your favorite APIs and explore new ones!">
+    <meta name="twitter:image" content="https://apilooter.computeranything.dev/static/api_looter.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicon-16.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon-32.png') }}">
+    <link rel="icon" type="image/png" sizes="48x48" href="{{ url_for('static', filename='favicon-48.png') }}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{{ url_for('static', filename='favicon-192.png') }}">
+    <link rel="icon" type="image/png" sizes="512x512" href="{{ url_for('static', filename='favicon-512.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='favicon-180.png') }}">
+
+    <!-- Scripts and Stylesheets -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.png') }}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
-    <title>{% block title %}API Looter{% endblock %}</title>
   </head>
   <body>
 
