@@ -5,13 +5,11 @@ Run this before committing changes to data.py
 """
 
 import sys
-import re
 from urllib.parse import urlparse
-from typing import List, Tuple
 import ipaddress
 
 
-def validate_apis():
+def validate_apis():  # noqa: C901
     """Validate all APIs in data.py for security and quality"""
     # Import the APIS list
     sys.path.insert(0, '.')
@@ -167,7 +165,7 @@ def validate_apis():
         print(f"\n💥 VALIDATION FAILED: {len(errors)} error(s) found")
         return False
     else:
-        print(f"\n✅ VALIDATION PASSED!")
+        print("\n✅ VALIDATION PASSED!")
         print(f"   - {len(APIS)} APIs validated")
         print(f"   - {len(warnings)} warning(s)")
         print("="*60)
@@ -187,7 +185,7 @@ def extract_domains():
                 parsed = urlparse(endpoint)
                 if parsed.netloc:
                     domains.add(parsed.netloc)
-            except:
+            except Exception:
                 pass
 
     return sorted(domains)

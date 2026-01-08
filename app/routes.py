@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, abort, jsonify
+from flask import Blueprint, render_template, request, abort
 from app import limiter
 from .data import get_all_apis, get_api_by_id
 from . import api_handlers
@@ -69,7 +69,7 @@ def api_detail(api_id):
         try:
             handler = get_handler(api)
             result, result_type = handler(api, params)
-        except Exception as e:
+        except Exception:
             # Don't expose internal errors to users
             result = "An error occurred while calling the API. Please try again."
             result_type = "error"

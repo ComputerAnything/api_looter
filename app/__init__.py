@@ -21,7 +21,7 @@ def get_allowed_domains():
                 parsed = urlparse(endpoint)
                 if parsed.netloc:
                     domains.add(parsed.netloc)
-            except:
+            except Exception:
                 pass
     return domains
 
@@ -78,7 +78,7 @@ def create_app():
             }), 429
 
         # Return simple HTML response for regular requests
-        return f'''
+        return '''
         <html>
             <head><title>Rate Limited</title></head>
             <body style="font-family: Arial; text-align: center; padding: 2em;">
