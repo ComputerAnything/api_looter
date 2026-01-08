@@ -1,6 +1,21 @@
 {% extends "layout.html" %}
 {% block title %}API Looter - {{ api.name }}{% endblock %}
 {% block content %}
+
+<!-- Adult Content Warning Modal -->
+{% if api.get('is_adult') %}
+<div id="adultWarningModal" class="modal">
+    <div class="modal-content">
+        <h2>⚠️ Content Warning</h2>
+        <p>{{ api.get('adult_warning', 'This API may contain content not suitable for all audiences.') }}</p>
+        <div class="modal-buttons">
+            <button class="modal-btn modal-btn-confirm" onclick="confirmAndClose()">I Understand, Continue</button>
+            <a href="{{ url_for('main.index') }}" class="modal-btn modal-btn-back">Go Back</a>
+        </div>
+    </div>
+</div>
+{% endif %}
+
 <div class="api-detail-center">
     <h2>{{ api.name }}</h2>
     <p>{{ api.description }}</p>
@@ -84,6 +99,18 @@
 </div>
 
 <script>
+    // Handle adult content warning modal
+    {% if api.get('is_adult') %}
+    window.addEventListener('load', function() {
+        const modal = document.getElementById('adultWarningModal');
+        modal.style.display = 'block';
+    });
+
+    function confirmAndClose() {
+        document.getElementById('adultWarningModal').style.display = 'none';
+    }
+    {% endif %}
+
     // Add a loading spinner when the form is submitted
     const form = document.querySelector('.api-form');
     const loading = document.createElement('div');

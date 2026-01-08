@@ -45,7 +45,9 @@ APIS = [
         "parameters": [],
         "why_use": "Simple API perfect for practicing JSON data extraction and response handling.",
         "how_use": "Returns motivational advice - great for learning apps, bots, or daily inspiration features.",
-        "category": "Fun"
+        "category": "Fun",
+        "is_adult": True,
+        "adult_warning": "This API may contain advice with adult language or mature themes."
     },
     {
         "id": 5,
