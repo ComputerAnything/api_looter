@@ -1,5 +1,6 @@
 import json
 import requests
+from app import is_allowed_domain
 
 
 def parse_response(response):
@@ -20,7 +21,11 @@ def parse_response(response):
 
 # Cat Facts API
 def handle_cat_facts_api(api, params=None):
-    response = requests.get(api.endpoint, headers={"Accept": "application/json"})
+    endpoint = api['endpoint']
+    if not is_allowed_domain(endpoint):
+        return "This API endpoint is not allowed for security reasons.", "error"
+
+    response = requests.get(endpoint, headers={"Accept": "application/json"}, timeout=10)
     try:
         data = response.json()
         # Extract the "fact" field from the response
@@ -31,12 +36,12 @@ def handle_cat_facts_api(api, params=None):
 
 # Dog CEO API
 def handle_dog_ceo_api(api, params=None):
-    response = requests.get(api.endpoint, headers={"Accept": "application/json"})
+    response = requests.get(api['endpoint'], headers={"Accept": "application/json"}, timeout=10)
     return parse_response(response)
 
 # DogAPI
 def handle_dog_api(api, params=None):
-    response = requests.get(api.endpoint, headers={"Accept": "application/json"})
+    response = requests.get(api['endpoint'], headers={"Accept": "application/json"}, timeout=10)
     try:
         data = response.json()
         # Extract the "body" field from the first item in "data"
@@ -53,7 +58,7 @@ def handle_jokeapi(api, params=None):
     endpoint = f"https://v2.jokeapi.dev/joke/{category}"
 
     # Make the API request with the updated endpoint and remaining params
-    response = requests.get(endpoint, params=params, headers={"Accept": "application/json"})
+    response = requests.get(endpoint, params=params, headers={"Accept": "application/json"}, timeout=10)
     return parse_jokeapi_response(response)
 
 def parse_jokeapi_response(response):
@@ -70,7 +75,7 @@ def parse_jokeapi_response(response):
 
 # Advice Slip API
 def handle_advice_slip_api(api, params=None):
-    response = requests.get(api.endpoint, headers={"Accept": "application/json"})
+    response = requests.get(api['endpoint'], headers={"Accept": "application/json"}, timeout=10)
     try:
         data = response.json()
         # Extract the "advice" field from the "slip" object
@@ -81,7 +86,7 @@ def handle_advice_slip_api(api, params=None):
 
 # Dad Jokes API
 def handle_dad_jokes_api(api, params=None):
-    response = requests.get(api.endpoint, headers={"Accept": "application/json"})
+    response = requests.get(api['endpoint'], headers={"Accept": "application/json"}, timeout=10)
     try:
         data = response.json()
         # Extract the "joke" field from the response
@@ -90,8 +95,9 @@ def handle_dad_jokes_api(api, params=None):
     except (KeyError, ValueError):
         return "Failed to parse Dad Jokes API response.", "text"
 
+# Kanye Rest API
 def handle_kanye_rest_api(api, params=None):
-    response = requests.get(api.endpoint, headers={"Accept": "application/json"})
+    response = requests.get(api['endpoint'], headers={"Accept": "application/json"}, timeout=10)
     try:
         data = response.json()
         # Extract the "quote" field from the response
@@ -100,6 +106,12 @@ def handle_kanye_rest_api(api, params=None):
     except (KeyError, ValueError):
         return "Failed to parse Kanye Rest API response.", "text"
 
+# Default handler for APIs without custom handlers
 def handle_default_api(api, params=None):
-    response = requests.get(api.endpoint, params=params, headers={"Accept": "application/json"})
+    endpoint = api['endpoint']
+    # SSRF Protection: Check if domain is whitelisted
+    if not is_allowed_domain(endpoint):
+        return "This API endpoint is not allowed for security reasons.", "error"
+
+    response = requests.get(endpoint, params=params, headers={"Accept": "application/json"}, timeout=10)
     return parse_response(response)

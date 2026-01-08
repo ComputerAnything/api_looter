@@ -1,10 +1,46 @@
 {% extends "layout.html" %}
 {% block title %}API Looter - {{ api.name }}{% endblock %}
 {% block content %}
+
+<!-- Adult Content Warning Modal -->
+{% if api.get('is_adult') %}
+<div id="adultWarningModal" class="modal">
+    <div class="modal-content">
+        <h2>⚠️ Content Warning</h2>
+        <p>{{ api.get('adult_warning', 'This API may contain content not suitable for all audiences.') }}</p>
+        <div class="modal-buttons">
+            <button class="modal-btn modal-btn-confirm" onclick="confirmAndClose()">I Understand, Continue</button>
+            <a href="{{ url_for('main.index') }}" class="modal-btn modal-btn-back">Go Back</a>
+        </div>
+    </div>
+</div>
+{% endif %}
+
 <div class="api-detail-center">
     <h2>{{ api.name }}</h2>
     <p>{{ api.description }}</p>
     <p><strong>Endpoint:</strong> {{ api.endpoint }}</p>
+
+    <!-- Educational Content -->
+    {% if api.why_use or api.how_use %}
+    <div class="api-education">
+        {% if api.why_use %}
+        <h3>💡 Why Use This API?</h3>
+        <p>{{ api.why_use }}</p>
+        {% endif %}
+
+        {% if api.how_use %}
+        <h3>🔧 How Developers Use It</h3>
+        <p>{{ api.how_use }}</p>
+        {% endif %}
+
+        {% if api.category %}
+        <p style="margin-top: 1rem; font-size: 0.9em; color: #1abc9c;">
+            <strong>Category:</strong> {{ api.category }}
+        </p>
+        {% endif %}
+    </div>
+    {% endif %}
 
     <form method="post" class="api-form">
         {% if api.parameters and api.parameters|length > 0 %}
@@ -62,8 +98,25 @@
     {% endif %}
 </div>
 
+{% if api.get('is_adult') %}
 <script>
-    // Add a loading spinner when the form is submitted
+    window.addEventListener('load', function() {
+        const modal = document.getElementById('adultWarningModal');
+        // Only show modal if there are no results (initial page load, not after API call)
+        const hasResult = {{ 'true' if result else 'false' }};
+        if (!hasResult) {
+            modal.style.display = 'block';
+        }
+    });
+
+    function confirmAndClose() {
+        document.getElementById('adultWarningModal').style.display = 'none';
+    }
+</script>
+{% endif %}
+
+<!-- Loading spinner logic -->
+<script>
     const form = document.querySelector('.api-form');
     const loading = document.createElement('div');
     loading.innerHTML = '<p>Loading...</p>';

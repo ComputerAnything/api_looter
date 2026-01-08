@@ -3,25 +3,14 @@ version: '3.8'
 services:
   web:
     build: .
-    container_name: api_looter_web
-    command: gunicorn -b 0.0.0.0:8000 run:app
-    # command: flask run --host=0.0.0.0 --port=8000
+    container_name: api_looter_dev
+    command: flask run --host=0.0.0.0 --port=8000
     ports:
-      - "8000:8000"
+      - "5000:8000"
     environment:
-      DATABASE_URL: ${DATABASE_URL}
-      SECRET_KEY: ${SECRET_KEY}
+      FLASK_APP: run.py
       FLASK_ENV: development
+      SECRET_KEY: ${SECRET_KEY}
+      REDIS_URL: memory://  # In-memory for development (no Redis container needed)
     volumes:
       - .:/app
-
-  watchtower:
-    image: containrrr/watchtower
-    container_name: watchtower
-    restart: always
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    command: --cleanup --schedule "0 0 * * *"
-
-volumes:
-  pgdata:

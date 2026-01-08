@@ -1,46 +1,77 @@
-from flask import Blueprint, render_template, request
-from .models import APIModel
-from .api_helpers import (
-    handle_cat_facts_api,
-    handle_dog_ceo_api,
-    handle_jokeapi,
-    handle_default_api,
-    handle_dog_api,
-    handle_advice_slip_api,
-    handle_kanye_rest_api,
-    handle_dad_jokes_api,
-)
+from flask import Blueprint, render_template, request, abort
+from app import limiter
+from .data import get_all_apis, get_api_by_id
+from . import api_handlers
 
 bp = Blueprint('main', __name__)
 
+
+def get_handler(api):
+    """
+    Get the appropriate handler for an API.
+
+    If has_handler is True, looks for a handler function named:
+    handle_{api_name.lower().replace(' ', '_')}_api
+
+    Falls back to handle_default_api if no custom handler is found.
+    """
+    if not api.get('has_handler'):
+        return api_handlers.handle_default_api
+
+    # Convert API name to handler function name
+    # "Dog CEO" -> "handle_dog_ceo_api"
+    # "JokeAPI" -> "handle_jokeapi_api"
+    handler_name = f"handle_{api.get('name', '').lower().replace(' ', '_')}_api"
+    handler = getattr(api_handlers, handler_name, None)
+
+    if handler:
+        return handler
+    else:
+        # Handler not found, fall back to default
+        return api_handlers.handle_default_api
+
+
 @bp.route('/')
 def index():
-    apis = APIModel.query.order_by(APIModel.name.asc()).all()
+    apis = get_all_apis()
     return render_template('index.html', apis=apis)
 
 @bp.route('/api/<int:api_id>', methods=['GET', 'POST'])
+@limiter.limit("10 per minute", methods=['POST'])  # Only rate limit POST requests
 def api_detail(api_id):
-    api = APIModel.query.get_or_404(api_id)
+    api = get_api_by_id(api_id)
+    if not api:
+        abort(404)
+
     result = None
     result_type = None
-    if request.method == 'POST':
-        params = {param["name"]: request.form.get(param["name"]) for param in api.parameters} if api.parameters else None
 
-        # Dispatch to helper based on API name
-        if api.name.lower() == "cat facts":
-            result, result_type = handle_cat_facts_api(api)
-        elif api.name.lower() == "dog ceo":
-            result, result_type = handle_dog_ceo_api(api)
-        elif api.name.lower() == "jokeapi":
-            result, result_type = handle_jokeapi(api, params)
-        elif api.name.lower() == "dogapi":
-            result, result_type = handle_dog_api(api, params)
-        elif api.name.lower() == "advice slip":
-            result, result_type = handle_advice_slip_api(api)
-        elif api.name.lower() == "kanye rest":
-            result, result_type = handle_kanye_rest_api(api)
-        elif api.name.lower() == "dad jokes":
-            result, result_type = handle_dad_jokes_api(api)
-        else:
-            result, result_type = handle_default_api(api, params)
+    # Only process POST requests (API calls)
+    if request.method == 'POST':
+
+        # Build parameters from form data
+        params = {}
+        if api.get("parameters"):
+            for param in api["parameters"]:
+                value = request.form.get(param["name"])
+                if value:
+                    # Input validation: prevent DoS attacks with very long parameters
+                    if len(str(value)) > 500:
+                        return render_template(
+                            'api_detail.html',
+                            api=api,
+                            result="Parameter too long (max 500 characters)",
+                            result_type="error"
+                        )
+                    params[param["name"]] = value
+
+        # Get handler and call it
+        try:
+            handler = get_handler(api)
+            result, result_type = handler(api, params)
+        except Exception:
+            # Don't expose internal errors to users
+            result = "An error occurred while calling the API. Please try again."
+            result_type = "error"
+
     return render_template('api_detail.html', api=api, result=result, result_type=result_type)

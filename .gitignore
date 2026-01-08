@@ -4,8 +4,11 @@ __pycache__/
 *.pyo
 *.pyd
 
-# Environment variables
+# Environment variables (NEVER commit credentials!)
 .env
+.env.development
+.env.staging
+.env.production
 
 # Virtual environments
 env/

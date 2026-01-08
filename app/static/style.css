@@ -1,3 +1,10 @@
+/* Remove default ul padding/margin for perfect centering */
+#api-list {
+    padding-left: 0;
+    margin-left: 0;
+    list-style: none;
+}
+
 body::before {
     content: "";
     position: fixed;
@@ -11,6 +18,7 @@ body::before {
     z-index: 0;
     pointer-events: none;
 }
+
 :root {
     --main-bg: #23272a;
     --panel-bg: #2d333b;
@@ -31,7 +39,8 @@ body {
 
 
 header.header-with-logos {
-    background: #ffffff; /* Mint green */
+    background: #ffffff;
+    /* Mint green */
     color: var(--text-main);
     padding: 0.8em 0 0.6em 0;
     text-align: center;
@@ -56,6 +65,7 @@ header.header-with-logos {
 .header-logo-left {
     margin-right: 18px;
 }
+
 .header-logo-right {
     margin-left: 18px;
 }
@@ -111,8 +121,10 @@ main {
     box-shadow: 0 4px 16px rgba(26, 188, 156, 0.10);
 }
 
-.api-detail-center, .container {
-    background: rgba(20, 24, 28, 0.98); /* Darker, nearly opaque */
+.api-detail-center,
+.container {
+    background: rgba(20, 24, 28, 0.98);
+    /* Darker, nearly opaque */
     border-radius: 12px;
     box-shadow: 0 2px 16px rgba(20, 92, 74, 0.18);
     border: 1.5px solid rgba(26, 188, 156, 0.22);
@@ -124,12 +136,14 @@ main {
     align-items: center;
 }
 
-.api-detail-center h2, .container h1 {
+.api-detail-center h2,
+.container h1 {
     color: var(--accent-green);
     margin-bottom: 0.5em;
 }
 
-.api-detail-center p, .container p {
+.api-detail-center p,
+.container p {
     color: var(--text-muted);
 }
 
@@ -149,7 +163,8 @@ label {
     color: var(--text-main);
 }
 
-input, select {
+input,
+select {
     background: #23272a;
     color: var(--text-main);
     border: 1px solid var(--border);
@@ -163,12 +178,14 @@ input, select {
     font-size: 1em;
 }
 
-input:focus, select:focus {
+input:focus,
+select:focus {
     border-color: var(--accent-green);
     outline: none;
 }
 
-button, .back-btn {
+button,
+.back-btn {
     background: var(--accent-green);
     color: #fff;
     border: none;
@@ -185,12 +202,16 @@ button, .back-btn {
     text-align: center;
 }
 
-button:hover, .back-btn:hover {
+button:hover,
+.back-btn:hover {
     background: var(--accent-green-dark);
     color: #fff;
 }
 
-.joke-result, pre, .api-detail-center .joke-result, .api-detail-center pre {
+.joke-result,
+pre,
+.api-detail-center .joke-result,
+.api-detail-center pre {
     background: #23272a;
     color: var(--text-main);
     border-radius: 8px;
@@ -211,39 +232,193 @@ button:hover, .back-btn:hover {
 }
 
 .footer-logo {
-  width: 45px;
-  height: 45px;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    width: 45px;
+    height: 45px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
 }
 
 .footer-powered-by {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  white-space: nowrap;
-  min-width: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    white-space: nowrap;
+    min-width: 0;
 }
 
 .mx-1 {
-  margin-left: 0.25rem;
-  margin-right: 0.25rem;
+    margin-left: 0.25rem;
+    margin-right: 0.25rem;
 }
+
 .d-none {
-  display: none !important;
+    display: none !important;
 }
+
 @media (min-width: 576px) {
-  .d-sm-inline {
-    display: inline !important;
-  }
+    .d-sm-inline {
+        display: inline !important;
+    }
+}
+
+/* Educational Content Section */
+.api-education {
+    background-color: #1e2327;
+    border-left: 4px solid var(--accent-green);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.api-education h3 {
+    color: var(--accent-green);
+    font-size: 1.1rem;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+}
+
+.api-education p {
+    color: #c9d1d9;
+    line-height: 1.6;
+    margin-bottom: 0.75rem;
+}
+
+.api-education p:last-child {
+    margin-bottom: 0;
 }
 
 @media (max-width: 600px) {
-    .api-detail-center, .container {
+
+    .api-detail-center,
+    .container {
         max-width: 98vw;
         padding: 1em 0.3em;
     }
-    input, select, .joke-result, pre {
+
+    input,
+    select,
+    .joke-result,
+    pre {
         max-width: 98vw;
+    }
+
+    .api-education {
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+    }
+}
+
+/* Adult Content Warning Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.modal-content {
+    background: var(--panel-bg);
+    border: 2px solid var(--accent-green);
+    border-radius: 12px;
+    padding: 2rem;
+    margin: auto;
+    margin-top: 10vh;
+    max-width: 450px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(26, 188, 156, 0.25);
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-content h2 {
+    color: var(--accent-green);
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.5em;
+}
+
+.modal-content p {
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+    font-size: 1.05em;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+.modal-btn {
+    padding: 0.7em 1.8em;
+    border: none;
+    border-radius: 6px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+}
+
+.modal-btn-confirm {
+    background: var(--accent-green);
+    color: #fff;
+}
+
+.modal-btn-confirm:hover {
+    background: var(--accent-green-dark);
+    box-shadow: 0 4px 12px rgba(26, 188, 156, 0.3);
+}
+
+.modal-btn-back {
+    background: transparent;
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+}
+
+.modal-btn-back:hover {
+    background: rgba(26, 188, 156, 0.1);
+    color: var(--accent-green);
+    border-color: var(--accent-green);
+}
+
+/* Mobile Modal Styles */
+@media (max-width: 600px) {
+    .modal-content {
+        margin-top: 15vh;
+        max-width: 75vw;
+        width: 95vw;
+        padding: 1.5rem 1rem;
+        border-radius: 10px;
     }
 }

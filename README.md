@@ -54,99 +54,131 @@ Easily search, explore, and test APIs right from your browser! 🛠️🌐
 
 ## ▶️ Usage
 
-1. **Set up the database:**
+### Local Development (No Docker Needed!)
+
+1. **Set up environment:**
 
     ```bash
-    python -m flask db init
-    python -m flask db migrate
-    python -m flask db upgrade
+    cp .env.development .env
     ```
 
-2. **Seed the database with sample data:**
+2. **Run the application:**
 
     ```bash
-    python -m app.seed
+    python run.py
     ```
 
-3. **Run the application:**
+3. **Open your browser:**
+    Go to [http://localhost:8000](http://localhost:8000) to start exploring and testing APIs!
 
-    ```bash
-    flask run
-    ```
-
-4. **Open your browser:**
-    Go to [http://127.0.0.1:5000](http://127.0.0.1:5000) to start adding and testing some API's api_looter!
+**That's it!** No database setup needed - all API data is stored in `app/data.py`.
 
 ---
 
-## 🐳 Docker Compose Setup
+## 🐳 Docker Setup (Staging/Production)
 
-If you prefer to run the application using Docker, you can use the provided `docker-compose.yml` file.
+For production-like testing with Docker:
 
-1. **Build and run the Docker containers:**
+### Staging
 
+1. **Set up environment:**
     ```bash
-    docker-compose up --build
+    cp .env.staging .env
+    # Edit .env and fill in: SECRET_KEY, REDIS_PASSWORD, CLOUDFLARE_TUNNEL_TOKEN
     ```
 
-2. **Access the application:**
-    Open your browser and go to [http://localhost:5000](http://localhost:5000).
-3. **Stop the containers:**
-    To stop the containers, press `Ctrl + C` in the terminal where you ran the `docker-compose` command.
-4. **Remove the containers:**
-    If you want to remove the containers and free up resources, run:
-
+2. **Build and run:**
     ```bash
-    docker-compose down
+    docker-compose -f docker-compose.staging.yml up --build
     ```
-5. **Access the database:**
-    You can access the PostgreSQL database using a database client like pgAdmin or DBeaver.
-    The connection details are as follows:
-    - Host: `db`
-    - Port: `5432`
-    - Database: `api_looter`
-    - User: `postgres`
-    - Password: `password`
+
+3. **Access the application:**
+    Open your browser and go to [http://localhost:5000](http://localhost:5000)
+
+### Production
+
+1. **Set up environment:**
+    ```bash
+    cp .env.production .env
+    # Edit .env and fill in production credentials
+    ```
+
+2. **Deploy:**
+    ```bash
+    docker-compose -f docker-compose.prod.yml up -d --build
+    ```
+
+See `docs/setup/PRODUCTION.md` for detailed deployment guide.
+
+### Stop Containers
+
+```bash
+# Staging
+docker-compose -f docker-compose.staging.yml down
+
+# Production
+docker-compose -f docker-compose.prod.yml down
+```
 
 ---
 
 ## 🗂️ Environment Variables
 
-Create a `.env` file in the root directory and add the following:
+This project uses environment-specific templates:
 
-    ```sh
-    # Database Configuration
-    DATABASE_URL=postgresql://psql_username:psql_password:5432/db_name
+- `.env.development` - Local development (copy to `.env`)
+- `.env.staging` - Staging deployment
+- `.env.production` - Production deployment
 
-    # Secret Key for Flask
-    SECRET_KEY=your_secret_key
-    ```
+**Required variables:**
+- `SECRET_KEY` - Flask secret key
+- `REDIS_URL` - Redis connection (`memory://` for dev, `redis://...` for production)
+- `REDIS_PASSWORD` - Redis password (staging/production only)
+- `CLOUDFLARE_TUNNEL_TOKEN` - Cloudflare tunnel token (staging/production only)
+- `FLASK_ENV` - Environment name (`development`, `staging`, or `production`)
 
-## ➕ Adding Your Own APIs
-
-To add a new API, simply add an `APIModel` entry to the `apis` list in [`app/seed.py`](app/seed.py).
-**No code changes are needed for most APIs!**
-
-**Example:**
-
-```python
-APIModel(
-    name="My Cool API",
-    description="Does something awesome.",
-    endpoint="https://api.example.com/endpoint",
-    parameters=[
-        {"name": "param1", "label": "Parameter 1", "type": "text", "required": True}
-    ]
-),
-```
-
-**Advanced:**
-If your API returns data in a very unique way and you want to customize how the response is displayed, you can add a helper function in [`app/api_helpers.py`](app/api_helpers.py).
-*This is optional and only needed for special cases!*
+See `.env.development` for a complete example.
 
 ---
 
-For most APIs, just editing `seed.py` is all you need.
+## ➕ Adding Your Own APIs
+
+**Want to contribute an API? It's super easy!**
+
+1. **Edit `app/data.py`** - Add your API to the `APIS` list:
+
+```python
+{
+    "id": 15,  # Next available ID
+    "name": "Your API Name",
+    "description": "What this API does.",
+    "endpoint": "https://api.example.com/v1/endpoint",
+    "parameters": [],  # Add parameters if needed
+    "why_use": "Why would a developer use this API?",
+    "how_use": "How do developers commonly use this API?",
+    "category": "Data",  # Images, Fun, Data, or Cryptocurrency
+    "has_handler": False  # Set to True only if you need custom response parsing
+},
+```
+
+2. **Validate:**
+```bash
+python validate_apis.py
+```
+
+3. **Test locally:**
+```bash
+python run.py
+# Visit http://localhost:8000 and test your API
+```
+
+4. **Submit a PR!**
+
+**The domain whitelist auto-updates** - no manual configuration needed!
+
+See [CONTRIBUTING.md](docs/contributing/CONTRIBUTING.md) for detailed guide including custom handlers.
+
+---
 
 ## 🤝 Contributing
 
