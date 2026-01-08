@@ -4,5 +4,5 @@ Flask-Limiter==3.5.0
 Flask-CORS==4.0.2
 requests==2.31.0
 gunicorn==21.2.0
-python-dotenv==1.0.0
+python-dotenv==1.2.1
 redis==5.0.1
