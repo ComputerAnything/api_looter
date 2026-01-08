@@ -95,6 +95,7 @@ def handle_dad_jokes_api(api, params=None):
     except (KeyError, ValueError):
         return "Failed to parse Dad Jokes API response.", "text"
 
+# Kanye Rest API
 def handle_kanye_rest_api(api, params=None):
     response = requests.get(api['endpoint'], headers={"Accept": "application/json"}, timeout=10)
     try:
@@ -105,6 +106,7 @@ def handle_kanye_rest_api(api, params=None):
     except (KeyError, ValueError):
         return "Failed to parse Kanye Rest API response.", "text"
 
+# Default handler for APIs without custom handlers
 def handle_default_api(api, params=None):
     endpoint = api['endpoint']
     # SSRF Protection: Check if domain is whitelisted

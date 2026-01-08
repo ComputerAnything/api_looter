@@ -89,7 +89,7 @@ api_looter/
 │   ├── __init__.py            # Flask app factory + security
 │   ├── data.py                # Static API data (contributors edit this!)
 │   ├── routes.py              # API endpoints
-│   ├── api_helpers.py         # API call handlers
+│   ├── api_handlers.py         # API call handlers
 │   ├── static/                # CSS, JS, images
 │   └── templates/             # HTML templates
 │

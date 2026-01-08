@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request
+from flask import Flask, jsonify, request
 from flask_limiter import Limiter
 from flask_wtf.csrf import CSRFProtect
 from flask_cors import CORS
@@ -70,10 +70,24 @@ def create_app():
     @app.errorhandler(429)
     def rate_limit_handler(e):
         """Handle rate limit exceeded"""
-        return {
-            'error': 'Too many requests. Please try again later.',
-            'retry_after': 60
-        }, 429
+        # Return JSON for AJAX requests
+        if request.headers.get('X-Requested-With') == 'XMLHttpRequest' or request.is_json:
+            return jsonify({
+                'error': 'Rate Limited',
+                'message': 'Too many requests. Please wait a moment before trying again.'
+            }), 429
+
+        # Return simple HTML response for regular requests
+        return f'''
+        <html>
+            <head><title>Rate Limited</title></head>
+            <body style="font-family: Arial; text-align: center; padding: 2em;">
+                <h1>⏱️ Rate Limited</h1>
+                <p>Too many requests. Please wait a moment before trying again.</p>
+                <a href="/">← Back to Home</a>
+            </body>
+        </html>
+        ''', 429
 
     # Security headers
     @app.after_request

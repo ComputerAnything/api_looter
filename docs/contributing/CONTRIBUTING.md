@@ -28,12 +28,28 @@ Thank you for your interest in contributing! 🎉
        "name": "Your API Name",
        "description": "What this API does (1-2 sentences).",
        "endpoint": "https://api.example.com/v1/endpoint",
-       "parameters": [  # Leave empty [] if no parameters
-           {"name": "query", "label": "Search Query", "type": "text", "required": True}
-       ],
+       "parameters": [],  # Leave empty [] if no parameters needed
        "why_use": "Why would a developer use this API? (Educational!)",
        "how_use": "How/when do developers commonly use this API?",
-       "category": "Data"  # Images, Fun, Data, or Cryptocurrency
+       "category": "Data",  # Images, Fun, Data, or Cryptocurrency
+       "has_handler": False  # Set to True only if you need custom response parsing (see below)
+   },
+   ```
+
+   **With parameters example:**
+   ```python
+   {
+       "id": 15,
+       "name": "Weather API",
+       "description": "Get weather data for any city.",
+       "endpoint": "https://api.weather.com/v1/current",
+       "parameters": [
+           {"name": "city", "label": "City Name", "type": "text", "required": True}
+       ],
+       "why_use": "Learn how to work with real-time weather data in applications.",
+       "how_use": "Used in weather apps, travel sites, and location-based services.",
+       "category": "Data",
+       "has_handler": False
    },
    ```
 
@@ -42,11 +58,13 @@ Thank you for your interest in contributing! 🎉
    python validate_apis.py
    ```
    This checks:
-   - ✅ HTTPS endpoint (not HTTP)
+   - ✅ HTTPS endpoint (not HTTP, except Numbers API)
    - ✅ No localhost/private IPs
+   - ✅ No internal domains (.internal, .corp, etc.)
    - ✅ All required fields present
    - ✅ Educational fields filled in
    - ✅ No security issues
+   - ✅ Endpoint domain is accessible
 
 6. **Test locally**:
    ```bash
@@ -75,15 +93,14 @@ That's it! The domain whitelist auto-updates from your endpoint. ✨
 ### ✅ Required
 - **Free to use** (no paid subscription)
 - **Publicly accessible** (no special access needed)
-- **HTTPS endpoint** (not HTTP, except documented legacy APIs)
-- **Family-friendly** (no adult/offensive content)
+- **HTTPS endpoint** (not HTTP, except documented legacy APIs like Numbers API)
+- **Family-friendly** (appropriate for general audiences)
 - **Educational value** (helps people learn about APIs)
 - **Working** (you tested it!)
 
 ### ❌ Not Accepted
 - Localhost/private IP endpoints
 - APIs requiring payment
-- APIs with adult/offensive content
 - Broken/deprecated APIs
 - APIs without documentation
 
@@ -112,13 +129,107 @@ That's it! The domain whitelist auto-updates from your endpoint. ✨
 
 ---
 
-## Custom Handlers (Advanced - Rarely Needed)
+## Custom Handlers (Advanced - Optional)
 
-**95% of APIs don't need this!** The default handler works for most APIs.
+**Most APIs don't need custom handlers!** The default handler shows the full JSON response.
 
-Only needed if your API has a very unusual response format.
+### When to Use a Custom Handler
 
-See `app/api_helpers.py` for examples, then update `app/routes.py`.
+Use `"has_handler": True` if you want to **extract specific fields** from the API response for a cleaner display.
+
+**Example - Without custom handler** (`has_handler: False`):
+```json
+{
+  "slip": {
+    "id": 123,
+    "advice": "Don't be a dick"
+  }
+}
+```
+
+**Example - With custom handler** (`has_handler: True`):
+```
+Don't be a dick
+```
+
+### How to Add a Custom Handler
+
+1. **Set `has_handler: True` in `app/data.py`**:
+   ```python
+   {
+       "id": 15,
+       "name": "Cat Facts",
+       "has_handler": True,  # ← Enable custom handler
+       # ... other fields
+   }
+   ```
+
+2. **Create handler function in `app/api_handlers.py`**:
+
+   The function name must follow this pattern:
+   - API name: "Cat Facts" → Function: `handle_cat_facts_api`
+   - API name: "Dog CEO" → Function: `handle_dog_ceo_api`
+   - API name: "Kanye Rest" → Function: `handle_kanye_rest_api`
+
+   ```python
+   def handle_cat_facts_api(api, params=None):
+       """Custom handler for Cat Facts API"""
+       endpoint = api['endpoint']
+
+       # SSRF Protection - always include this!
+       if not is_allowed_domain(endpoint):
+           return "This API endpoint is not allowed for security reasons.", "error"
+
+       response = requests.get(endpoint, headers={"Accept": "application/json"}, timeout=10)
+
+       try:
+           data = response.json()
+           # Extract the specific field you want
+           fact = data["fact"]
+           return fact, "text"  # Return as plain text
+       except (KeyError, ValueError):
+           return "Failed to parse API response.", "text"
+   ```
+
+3. **That's it!** The routing system automatically finds your handler based on the API name.
+
+### Handler Return Types
+
+Your handler should return a tuple: `(content, type)`
+
+**Available types:**
+- `"text"` - Plain text display
+- `"json"` - Syntax-highlighted JSON
+- `"image"` - Display an image URL
+- `"joke"` - Special formatting for jokes (setup + delivery)
+- `"error"` - Error message
+
+**Examples:**
+
+```python
+# Plain text
+return "This is a cat fact", "text"
+
+# JSON
+return json.dumps({"data": "value"}, indent=2), "json"
+
+# Image URL
+return "https://example.com/image.jpg", "image"
+
+# Joke format
+return {"setup": "Why did...", "delivery": "Because..."}, "joke"
+
+# Error
+return "API request failed", "error"
+```
+
+### Examples to Reference
+
+Check these existing handlers in `app/api_handlers.py`:
+- `handle_cat_facts_api` - Extracts a single field
+- `handle_advice_slip_api` - Nested field extraction
+- `handle_jokeapi` - Dynamic URL construction with parameters
+- `handle_default_api` - The default handler (shows full JSON)
 
 ---
 
@@ -185,7 +296,10 @@ ruff format .
    - Security scanning
    - Secret detection
 
-2. **Review**: Maintainers will review your contribution
+2. **Manual Review**: Maintainers will manually review your contribution for:
+   - API quality and relevance
+   - Appropriate content warnings (if needed)
+   - Educational value
 
 3. **Merge**: Once approved and checks pass, we'll merge!
 

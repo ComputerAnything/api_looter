@@ -534,13 +534,13 @@ api_looter/
 │   │
 │   ├── data.py                # ⭐ EDIT THIS TO ADD APIs!
 │   │                          # - Static API list
-│   │                          # - Helper functions
+│   │                          # - handler functions
 │   │
 │   ├── routes.py              # API endpoints
 │   │                          # - Homepage (GET /)
 │   │                          # - API detail (GET/POST /api/<id>)
 │   │
-│   ├── api_helpers.py         # API call handlers
+│   ├── api_handlers.py         # API call handlers
 │   │                          # - SSRF protection
 │   │                          # - Request handling
 │   │                          # - Response parsing

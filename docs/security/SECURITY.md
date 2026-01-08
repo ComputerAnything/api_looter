@@ -14,7 +14,7 @@ api_looter implements multiple layers of security:
 
 ### Application Security
 - ✅ **SSRF Protection**: Auto-whitelisted domains only (extracted from `data.py`)
-- ✅ **Rate Limiting**: 30 requests/minute per IP on API testing endpoints
+- ✅ **Rate Limiting**: 10 POST requests/minute per IP globally (all APIs combined)
 - ✅ **Input Validation**: 500 character limit on all parameters
 - ✅ **Security Headers**: CSP, HSTS, X-Frame-Options, X-Content-Type-Options
 - ✅ **HTTPS Enforcement**: Production mode requires HTTPS
@@ -101,9 +101,16 @@ When adding new APIs to `app/data.py`:
     "parameters": [],
     "why_use": "Learn about public APIs.",
     "how_use": "Used for testing and education.",
-    "category": "Data"
+    "category": "Data",
+    "has_handler": False  # Set to True only if custom response parsing needed
 }
 ```
+
+**If adding a custom handler** (`has_handler: True`):
+- Create handler function in `app/api_handlers.py`
+- **MUST include SSRF protection**: `if not is_allowed_domain(endpoint):`
+- **MUST use timeout**: `requests.get(..., timeout=10)`
+- See existing handlers for examples
 
 ## Automated Security Checks
 

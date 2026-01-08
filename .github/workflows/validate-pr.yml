@@ -63,9 +63,9 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run Bandit security scanner
-        uses: PyCQA/bandit-action@v1
-        with:
-          args: '-r app/ -ll'
+        run: |
+          pip install bandit
+          bandit -r app/ -ll
 
       - name: Check for secrets
         uses: trufflesecurity/trufflehog@main

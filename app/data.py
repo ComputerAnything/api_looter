@@ -12,7 +12,9 @@ APIS = [
         "parameters": [],
         "why_use": "Great for placeholder images, testing image handling, or building pet-related apps.",
         "how_use": "Perfect for learning HTTP requests - no API key needed, returns JSON with image URL. Ideal for beginners practicing API calls.",
-        "category": "Images"
+        "category": "Images",
+        "has_handler": True,
+        "is_adult": False
     },
     {
         "id": 2,
@@ -22,7 +24,9 @@ APIS = [
         "parameters": [],
         "why_use": "Learn JSON parsing and handling text responses from APIs.",
         "how_use": "Simple GET request returns random cat facts - ideal first API for beginners. No authentication required.",
-        "category": "Fun"
+        "category": "Fun",
+        "has_handler": True,
+        "is_adult": False
     },
     {
         "id": 3,
@@ -35,7 +39,9 @@ APIS = [
         ],
         "why_use": "Learn how to work with APIs that require authentication and handle query parameters.",
         "how_use": "Demonstrates API key usage and parameter passing. Common in weather apps, travel sites, and IoT projects.",
-        "category": "Data"
+        "category": "Data",
+        "has_handler": False,
+        "is_adult": False
     },
     {
         "id": 4,
@@ -46,6 +52,7 @@ APIS = [
         "why_use": "Simple API perfect for practicing JSON data extraction and response handling.",
         "how_use": "Returns motivational advice - great for learning apps, bots, or daily inspiration features.",
         "category": "Fun",
+        "has_handler": True,
         "is_adult": True,
         "adult_warning": "This API may contain advice with adult language or mature themes."
     },
@@ -81,7 +88,10 @@ APIS = [
         ],
         "why_use": "Learn parameter handling with dropdown options and conditional response structures.",
         "how_use": "Popular for Slack bots, Discord bots, and entertainment apps. Shows how to handle multiple response formats.",
-        "category": "Fun"
+        "category": "Fun",
+        "has_handler": True,
+        "is_adult": True,
+        "adult_warning": "This API may return jokes with adult language or themes."
     },
     {
         "id": 6,
@@ -122,7 +132,9 @@ APIS = [
         ],
         "why_use": "Practice working with financial data APIs and real-time price information.",
         "how_use": "Used in crypto portfolio trackers, price alert apps, and trading dashboards. No API key required for basic usage.",
-        "category": "Cryptocurrency"
+        "category": "Cryptocurrency",
+        "has_handler": False,
+        "is_adult": False
     },
     {
         "id": 7,
@@ -134,7 +146,9 @@ APIS = [
         ],
         "why_use": "Learn about machine learning prediction APIs and probability-based responses.",
         "how_use": "Useful for data analysis, user profiling, and demographic research. Returns gender probability scores.",
-        "category": "Data"
+        "category": "Data",
+        "has_handler": False,
+        "is_adult": False
     },
     {
         "id": 8,
@@ -146,7 +160,9 @@ APIS = [
         ],
         "why_use": "Understand prediction APIs and statistical estimation from names.",
         "how_use": "Used in demographic analysis, marketing research, and data enrichment tools.",
-        "category": "Data"
+        "category": "Data",
+        "has_handler": False,
+        "is_adult": False
     },
     {
         "id": 9,
@@ -158,7 +174,9 @@ APIS = [
         ],
         "why_use": "Practice handling multiple prediction results with probability scores.",
         "how_use": "Helps with internationalization, market research, and understanding name origins. Returns multiple country probabilities.",
-        "category": "Data"
+        "category": "Data",
+        "has_handler": False,
+        "is_adult": False
     },
     {
         "id": 10,
@@ -168,7 +186,9 @@ APIS = [
         "parameters": [],
         "why_use": "Learn to navigate nested JSON responses and extract specific data fields.",
         "how_use": "Great for pet apps, educational content, or practicing JSON parsing with complex structures.",
-        "category": "Fun"
+        "category": "Fun",
+        "has_handler": False,
+        "is_adult": False
     },
     {
         "id": 11,
@@ -178,7 +198,9 @@ APIS = [
         "parameters": [],
         "why_use": "Simple text-based API for learning basic HTTP requests and plain text responses.",
         "how_use": "Fun facts for educational apps, trivia games, or daily number facts. Returns plain text instead of JSON.",
-        "category": "Fun"
+        "category": "Fun",
+        "has_handler": False,
+        "is_adult": False
     },
     {
         "id": 12,
@@ -190,7 +212,9 @@ APIS = [
         ],
         "why_use": "Practice working with large, complex JSON responses and search functionality.",
         "how_use": "Essential for book apps, library systems, reading trackers, and educational projects. Free and extensive book database.",
-        "category": "Data"
+        "category": "Data",
+        "has_handler": False,
+        "is_adult": False
     },
     {
         "id": 13,
@@ -200,7 +224,10 @@ APIS = [
         "parameters": [],
         "why_use": "Extremely simple API perfect for your very first API call - just one endpoint, no parameters.",
         "how_use": "Popular for meme apps, quote generators, and teaching API basics. Instant success guaranteed!",
-        "category": "Fun"
+        "category": "Fun",
+        "has_handler": True,
+        "is_adult": True,
+        "adult_warning": "Some quotes may contain strong language or mature themes."
     },
     {
         "id": 14,
@@ -210,7 +237,10 @@ APIS = [
         "parameters": [],
         "why_use": "Learn about content negotiation - API returns different formats based on Accept header.",
         "how_use": "Common in Slack bots, entertainment apps, and icebreaker tools. Shows how headers affect API responses.",
-        "category": "Fun"
+        "category": "Fun",
+        "has_handler": False,
+        "is_adult": True,
+        "adult_warning": "Some jokes may contain mild adult humor."
     }
 ]
 

@@ -374,7 +374,6 @@ pre,
 
 .modal-buttons {
     display: flex;
-    /* gap: 1rem; */
     justify-content: center;
     flex-wrap: wrap;
     flex-direction: column;
@@ -421,35 +420,5 @@ pre,
         width: 95vw;
         padding: 1.5rem 1rem;
         border-radius: 10px;
-    }
-
-    .modal-content h2 {
-        font-size: 1.3em;
-        margin-bottom: 0.8rem;
-    }
-
-    .modal-content p {
-        font-size: 0.95em;
-        margin-bottom: 1.2rem;
-    }
-
-    .modal-buttons {
-        flex-direction: column;
-        /* gap: 0.75rem; */
-    }
-
-    .modal-btn {
-        padding: 0.8em 1.5em;
-        font-size: 0.95em;
-        width: 100%;
-        box-sizing: border-box;
-    }
-
-    .modal-btn-confirm {
-        order: 1;
-    }
-
-    .modal-btn-back {
-        order: 2;
     }
 }

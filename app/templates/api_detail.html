@@ -98,20 +98,25 @@
     {% endif %}
 </div>
 
+{% if api.get('is_adult') %}
 <script>
-    // Handle adult content warning modal
-    {% if api.get('is_adult') %}
     window.addEventListener('load', function() {
         const modal = document.getElementById('adultWarningModal');
-        modal.style.display = 'block';
+        // Only show modal if there are no results (initial page load, not after API call)
+        const hasResult = {{ 'true' if result else 'false' }};
+        if (!hasResult) {
+            modal.style.display = 'block';
+        }
     });
 
     function confirmAndClose() {
         document.getElementById('adultWarningModal').style.display = 'none';
     }
-    {% endif %}
+</script>
+{% endif %}
 
-    // Add a loading spinner when the form is submitted
+<!-- Loading spinner logic -->
+<script>
     const form = document.querySelector('.api-form');
     const loading = document.createElement('div');
     loading.innerHTML = '<p>Loading...</p>';
