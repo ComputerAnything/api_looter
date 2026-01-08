@@ -58,7 +58,7 @@ def handle_jokeapi(api, params=None):
     endpoint = f"https://v2.jokeapi.dev/joke/{category}"
 
     # Make the API request with the updated endpoint and remaining params
-    response = requests.get(endpoint, params=params, headers={"Accept": "application/json"})
+    response = requests.get(endpoint, params=params, headers={"Accept": "application/json"}, timeout=10)
     return parse_jokeapi_response(response)
 
 def parse_jokeapi_response(response):
