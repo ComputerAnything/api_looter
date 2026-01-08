@@ -244,6 +244,33 @@ button:hover, .back-btn:hover {
   }
 }
 
+/* Educational Content Section */
+.api-education {
+    background-color: #1e2327;
+    border-left: 4px solid var(--accent-green);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.api-education h3 {
+    color: var(--accent-green);
+    font-size: 1.1rem;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+}
+
+.api-education p {
+    color: #c9d1d9;
+    line-height: 1.6;
+    margin-bottom: 0.75rem;
+}
+
+.api-education p:last-child {
+    margin-bottom: 0;
+}
+
 @media (max-width: 600px) {
     .api-detail-center, .container {
         max-width: 98vw;
@@ -251,5 +278,9 @@ button:hover, .back-btn:hover {
     }
     input, select, .joke-result, pre {
         max-width: 98vw;
+    }
+    .api-education {
+        padding: 1rem;
+        margin-bottom: 1.5rem;
     }
 }

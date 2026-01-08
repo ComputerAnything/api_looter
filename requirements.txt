@@ -1,8 +1,8 @@
-Flask>=2.2.5
-Flask-WTF==1.0.0
-requests==2.26.0
-gunicorn==20.1.0
-Flask-SQLAlchemy
-Flask-Migrate
-python-dotenv
-psycopg2-binary
+Flask==2.3.3
+Flask-WTF==1.2.1
+Flask-Limiter==3.5.0
+Flask-CORS==4.0.2
+requests==2.31.0
+gunicorn==21.2.0
+python-dotenv==1.0.0
+redis==5.0.1

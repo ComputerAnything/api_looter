@@ -6,6 +6,27 @@
     <p>{{ api.description }}</p>
     <p><strong>Endpoint:</strong> {{ api.endpoint }}</p>
 
+    <!-- Educational Content -->
+    {% if api.why_use or api.how_use %}
+    <div class="api-education">
+        {% if api.why_use %}
+        <h3>💡 Why Use This API?</h3>
+        <p>{{ api.why_use }}</p>
+        {% endif %}
+
+        {% if api.how_use %}
+        <h3>🔧 How Developers Use It</h3>
+        <p>{{ api.how_use }}</p>
+        {% endif %}
+
+        {% if api.category %}
+        <p style="margin-top: 1rem; font-size: 0.9em; color: #1abc9c;">
+            <strong>Category:</strong> {{ api.category }}
+        </p>
+        {% endif %}
+    </div>
+    {% endif %}
+
     <form method="post" class="api-form">
         {% if api.parameters and api.parameters|length > 0 %}
             <fieldset style="border:1px solid #ccc; padding:1em; margin-bottom:1em;">
