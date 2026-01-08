@@ -1,6 +1,6 @@
 Flask==2.3.3
 Flask-WTF==1.2.1
-Flask-Limiter==3.5.0
+Flask-Limiter==3.11.0
 Flask-CORS==4.0.2
 requests==2.31.0
 gunicorn==21.2.0
