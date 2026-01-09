@@ -86,7 +86,9 @@ services:
     image: cloudflare/cloudflared:latest
     container_name: api_looter_cloudflared
     restart: always
-    command: tunnel --no-autoupdate run --token ${CLOUDFLARE_TUNNEL_TOKEN}
+    command: tunnel run
+    volumes:
+      - ./cloudflared-config:/etc/cloudflared:ro
     networks:
       - proxy_network
     depends_on:
