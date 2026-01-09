@@ -29,3 +29,6 @@ instance/
 
 # Ruff cache
 .ruff_cache/
+
+# Cloudflare tunnel credentials (NEVER commit!)
+cloudflared-config/*.json
